@@ -4,6 +4,12 @@
 #  Run as Administrator in PowerShell 5+
 # ══════════════════════════════════════════════════════════════
 
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Host "`n  Wrath requires Administrator privileges." -ForegroundColor Red
+    Write-Host "  Right-click PowerShell and choose 'Run as Administrator', then try again.`n" -ForegroundColor Yellow
+    exit
+}
+
 Add-Type -AssemblyName PresentationFramework
 Add-Type -AssemblyName PresentationCore
 Add-Type -AssemblyName WindowsBase
